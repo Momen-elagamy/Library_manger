@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br><br><br>
+<h1>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Book</h1>
+
+<div class="form-container">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+
+    <a href="{% url 'books' %}" class="btn btn-secondary">Back to Book List</a>
+</div>
+
+<style>
+    .form-container {
+        background-color: #1e1e1e; /* Dark background for the form container */
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        max-width: 600px;
+        margin: 20px auto;
+        color: #e0e0e0; /* Light text color */
+    }
+
+    .form-container form {
+        margin: 0;
+    }
+
+    .form-container input,
+    .form-container select,
+    .form-container textarea {
+        background-color: #333; /* Dark background for form fields */
+        border: 1px solid #444;
+        color: #e0e0e0; /* Light text color */
+        border-radius: 5px;
+        padding: 10px;
+        width: calc(100% - 22px); /* Full-width with padding adjustment */
+        margin-bottom: 10px;
+    }
+
+    .form-container button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #007bff; /* Matching primary button color */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin: 10px 0;
+    }
+
+    .form-container button:hover {
+        background-color: #0056b3; /* Darker shade for hover effect */
+    }
+
+    .btn-secondary {
+        background-color: #6c757d; /* Matching secondary button color */
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        display: inline-block;
+        transition: background-color 0.3s;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268; /* Darker shade for hover effect */
+    }
+</style>
+
+{% endblock %}

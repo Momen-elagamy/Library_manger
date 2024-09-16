@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<style>
+    .book-info-container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        background-color: #1e1e1e; /* Dark background for content */
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        color: #e0e0e0; /* Light text color */
+        text-align: center; /* Center align text and image */
+    }
+
+    .book-info-container h1 {
+        margin-bottom: 20px;
+        color: #00bfae; /* Unique color for headings */
+        font-size: 2em; /* Larger heading */
+    }
+
+    .book-info-container img {
+        max-width: 100%;
+        height: auto; /* Maintain aspect ratio */
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for image */
+    }
+
+    .book-info-container p {
+        font-size: 18px;
+        margin-bottom: 15px;
+        line-height: 1.6; /* Improve readability */
+    }
+
+    .book-info-container strong {
+        color: #00bfae; /* Unique color for labels */
+    }
+
+    .book-info-container .description {
+        margin-top: 20px;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #e0e0e0;
+        text-align: left; /* Align description to the left for better readability */
+    }
+
+    .book-info-container .book-actions {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center; /* Center align buttons */
+        gap: 10px; /* Space between buttons */
+    }
+
+    .btn-success {
+        background-color: #00bfae; /* Matches the heading color */
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block; /* Make button a block element */
+        transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+    }
+
+    .btn-success:hover {
+        background-color: #009688; /* Slightly darker shade */
+        transform: scale(1.05); /* Slight zoom on hover */
+    }
+
+    .btn-secondary {
+        background-color: #6c757d; /* Grey for "Not Available" state */
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+        display: inline-block; /* Make button a block element */
+    }
+</style>
+
+<div class="book-info-container">
+    <h1>{{ book.title }}</h1>
+
+    {% if book.image %}
+        <img src="{{ book.image.url }}" alt="{{ book.title }} cover">
+    {% else %}
+        <p>No cover image available.</p>
+    {% endif %}
+
+    <p><strong>Author:</strong> {{ book.author }}</p>
+    <p><strong>Published Date:</strong> {{ book.published_date }}</p>
+    <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+    <p><strong>Pages:</strong> {{ book.pages }}</p>
+    <p><strong>Language:</strong> {{ book.language }}</p>
+
+    <div class="description">
+        <strong>Description:</strong>
+        <p>{{ book.description }}</p>
+    </div>
+
+    <div class="book-actions">
+        {% if user.is_authenticated %}
+            {% if book.available %}
+                <a href="{% url 'borrow_book' book.id %}" class="btn btn-success">Borrow Book</a>
+            {% else %}
+                <span class="btn btn-secondary">Not Available</span>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

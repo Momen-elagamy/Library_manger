@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .not-authorized-container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        background-color: #1e1e1e; /* Dark background for content */
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        color: #e0e0e0; /* Light text color */
+        text-align: center; /* Center-align the text */
+    }
+
+    .not-authorized-container h1 {
+        margin-bottom: 20px;
+        color: #dc3545; /* Bootstrap Danger Color for alerts */
+    }
+
+    .not-authorized-container p {
+        font-size: 16px;
+        margin-top: 10px;
+    }
+</style>
+<br>
+<br>
+<br>
+<div class="not-authorized-container">
+    <h1>Not Authorized</h1>
+    <p>You are not authorized to view this page.</p>
+</div>
+
+{% endblock %}

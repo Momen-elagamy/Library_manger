@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br><br><br>
+<h1>Confirm Deletion</h1>
+
+<p>Are you sure you want to delete "{{ book.title }}"?</p>
+
+<form method="post" class="delete-form">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="{% url 'books' %}" class="btn btn-secondary">Cancel</a>
+</form>
+
+<style>
+    .delete-form {
+        background-color: #1e1e1e; /* Dark background for the form */
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 20px;
+        max-width: 400px;
+        margin: 20px auto; /* Center form with margin */
+        color: #e0e0e0; /* Light text color */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow effect */
+    }
+
+    .btn-danger {
+        background-color: #dc3545; /* Matching theme color */
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.3s;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333; /* Darker shade for hover effect */
+    }
+
+    .btn-secondary {
+        background-color: #6c757d; /* Matching theme color */
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.3s;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268; /* Darker shade for hover effect */
+    }
+</style>
+
+{% endblock %}

@@ -1,0 +1,202 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br><br><br>
+<h1>Available Books</h1>
+
+<div class="books-container">
+    {% for book in books %}
+    <a href="{% url 'book_detail' book.id %}" class="book-link">
+        <div class="book-card">
+            {% if book.image %}
+            <img src="{{ book.image.url }}" class="card-img-top" alt="{{ book.title }}">
+            {% endif %}
+            <h2>{{ book.title }}</h2>
+            <p><strong>Author:</strong> {{ book.author }}</p>
+            <p><strong>Published Date:</strong> {{ book.published_date }}</p>
+            <p><strong>Description:</strong> {{ book.description }}</p>
+            <p><strong>Available:</strong> {% if book.available %}<span class="available">Yes</span>{% else %}<span class="not-available">No</span>{% endif %}</p>
+
+            {% if user.is_authenticated %}
+
+            <div class="book-actions">
+                <br>
+                {% if book.available %}
+                <a href="{% url 'borrow_book' book.id %}" class="btn btn-success btn-action">Borrow</a>
+
+                </br>
+                {% endif %}
+                {% if user.is_staff %}
+                <div class="admin-actions">
+                    <a href="{% url 'book_delete' book.id %}" class="btn btn-danger btn-action">Delete</a>
+                    <a href="{% url 'book_edit' book.id %}" class="btn btn-warning btn-action">Edit</a>
+
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </a>
+    {% empty %}
+    <p>No books available.</p>
+    {% endfor %}
+</div>
+
+{% if user.is_authenticated and user.is_staff %}
+<a href="{% url 'add_book' %}" class="btn btn-add">Add Book</a>
+{% endif %}
+
+<style>
+    body {
+        background-color: #121212; /* Dark background for dark mode */
+        color: #e0e0e0; /* Light text color */
+    }
+
+    .books-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .book-link {
+        text-decoration: none; /* Remove default anchor styling */
+        color: inherit; /* Inherit text color to maintain dark mode consistency */
+    }
+
+    .book-card {
+        background-color: #1e1e1e; /* Slightly lighter dark background for cards */
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 15px;
+        width: 300px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease; /* Adds smooth hover effect */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .book-card:hover {
+        transform: scale(1.05); /* Slight zoom on hover */
+    }
+
+    .book-card img {
+        border-radius: 5px;
+        margin-bottom: 10px;
+        width: 100%; /* Adjust width as needed */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .book-card h2 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        color: #00bfae; /* Unique color for headings */
+    }
+
+    .book-card p {
+        margin: 5px 0;
+    }
+
+    .available {
+        color: green;
+    }
+
+    .not-available {
+        color: red;
+    }
+
+    .book-actions {
+        margin-top: 10px;
+        display: flex;
+        gap: 10px; /* Spacing between action buttons */
+    }
+
+    .admin-actions {
+        margin-top: 10px;
+        display: flex;
+        gap: 10px; /* Spacing between admin buttons */
+    }
+
+    .book-card a {
+        display: inline-block;
+        padding: 10px;
+        margin: 5px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .btn-action {
+        padding: 10px 15px; /* Uniform padding for consistency */
+        font-size: 14px; /* Consistent font size */
+        width: auto; /* Adjust width to fit content */
+    }
+
+    .btn-success {
+        background-color: #00bfae; /* Matches the heading color */
+        color: #fff;
+    }
+
+    .btn-danger {
+        background-color: #e53935; /* Deep red for better contrast */
+        color: #fff;
+    }
+
+    .btn-warning {
+        background-color: #fbc02d; /* Lighter yellow for visibility */
+        color: #333;
+    }
+
+    .btn-primary {
+        background-color: #007bff; /* Consistent blue for actions */
+        color: #fff;
+    }
+
+    .btn-add {
+        background-color: #007bff; /* Blue color for Add Book button */
+        color: #fff;
+        padding: 10px 20px; /* Padding for better clickability */
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        margin: 20px 0; /* Space above and below the button */
+    }
+
+    .btn-add:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+        opacity: 0.9; /* Slightly less opacity on hover */
+    }
+
+    .btn-action:hover {
+        opacity: 0.9; /* Slightly less opacity on hover */
+    }
+
+    @media (max-width: 768px) {
+        .books-container {
+            flex-direction: column;
+            align-items: center;
+            padding: 10px; /* Add some padding for better layout */
+        }
+
+        .book-card {
+            width: 100%; /* Full width for better fit on smaller screens */
+            max-width: 400px; /* Adjust the max width for smaller screens */
+        }
+
+        .btn-action, .btn-add {
+            font-size: 14px; /* Slightly larger font size for better readability */
+            padding: 12px 20px; /* Ensure enough padding for touch targets */
+            width: auto; /* Auto width to prevent stretching */
+        }
+
+        .admin-actions, .book-actions {
+            flex-direction: column; /* Stack buttons vertically */
+            gap: 10px; /* Space between buttons */
+        }
+    }
+</style>
+
+{% endblock %}

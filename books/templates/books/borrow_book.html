@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .borrow-book-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #1e1e1e; /* Dark background for content */
+        color: #e0e0e0; /* Light text color */
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        text-align: center;
+    }
+
+    .borrow-book-container h1 {
+        margin-bottom: 20px;
+        color: #00bfae; /* Unique color for headings */
+    }
+
+    .borrow-book-container p {
+        margin-bottom: 20px;
+        font-size: 18px;
+    }
+
+    .borrow-book-container form {
+        margin-bottom: 20px;
+    }
+
+    .borrow-book-container button {
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .borrow-book-container button:hover {
+        background-color: #0056b3;
+    }
+
+    .borrow-book-container a {
+        color: #007bff;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.3s;
+    }
+
+    .borrow-book-container a:hover {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+
+    .book-card {
+        background-color: #1e1e1e; /* Dark background for book card */
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        text-align: left;
+        color: #e0e0e0;
+        margin: 0 auto;
+        max-width: 90%; /* Adjusted for responsiveness */
+    }
+
+    .book-card h2 {
+        color: #00bfae; /* Unique color for headings */
+        margin-bottom: 10px;
+    }
+
+    .book-card p {
+        margin: 5px 0;
+    }
+</style>
+
+<div class="borrow-book-container">
+    <h1>Borrow Book</h1>
+
+    <div class="book-card">
+        <h2>{{ book.title }}</h2>
+        <p><strong>Author:</strong> {{ book.author }}</p>
+        <p><strong>Published Date:</strong> {{ book.published_date }}</p>
+        <p><strong>Description:</strong> {{ book.description }}</p>
+        <p><strong>Available:</strong> {% if book.available %}<span style="color: green;">Yes</span>{% else %}<span style="color: red;">No</span>{% endif %}</p>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Borrow Book</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

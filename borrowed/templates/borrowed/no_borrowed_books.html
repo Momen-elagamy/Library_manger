@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .no-borrowed-books-container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        background-color: #1e1e1e; /* Dark background for content */
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        color: #e0e0e0; /* Light text color */
+        text-align: center; /* Center-align the text */
+    }
+
+    .no-borrowed-books-container h1 {
+        margin-bottom: 20px;
+        color: #00bfae; /* Unique color for headings */
+    }
+
+    .no-borrowed-books-container p {
+        font-size: 16px;
+        margin-top: 10px;
+    }
+</style>
+<br>
+<br>
+<br>
+<div class="no-borrowed-books-container">
+    <h1>No Borrowed Books</h1>
+    <p>You haven't borrowed any books yet.</p>
+</div>
+
+{% endblock %}

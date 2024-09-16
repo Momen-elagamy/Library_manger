@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br><br><br>
+
+<h1>All Borrowed Books</h1>
+
+<div class="borrowed-books-list">
+    {% if borrowed_books %}
+        <ul>
+            {% for borrowed in borrowed_books %}
+                <li>{{ borrowed.book.title }} borrowed by {{ borrowed.user.username }} - Return by {{ borrowed.return_date }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No books have been borrowed.</p>
+    {% endif %}
+</div>
+
+<style>
+    .borrowed-books-list {
+        background-color: #1e1e1e; /* Dark background for the list */
+        color: #e0e0e0; /* Light text color */
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        max-width: 800px;
+        margin: 20px auto; /* Center the container with margin */
+    }
+
+    .borrowed-books-list ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0; /* Remove default margin */
+    }
+
+    .borrowed-books-list li {
+        padding: 10px;
+        border-bottom: 1px solid #333;
+    }
+
+    .borrowed-books-list li:last-child {
+        border-bottom: none; /* Remove border from the last item */
+    }
+
+    .borrowed-books-list p {
+        margin-top: 20px;
+        color: #e0e0e0; /* Ensure the text color matches the theme */
+    }
+</style>
+
+{% endblock %}

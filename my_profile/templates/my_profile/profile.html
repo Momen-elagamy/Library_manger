@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<style>
+    .profile-container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        background-color: #1e1e1e; /* Dark background for content */
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        color: #e0e0e0; /* Light text color */
+    }
+
+    .profile-container h1 {
+        margin-bottom: 20px;
+        color: #00bfae; /* Unique color for headings */
+    }
+
+    .profile-container p {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .profile-container strong {
+        color: #00bfae; /* Unique color for labels */
+    }
+
+    .profile-container a {
+        display: inline-block;
+        padding: 12px 20px;
+        color: #ffffff;
+        background-color: #dc3545; /* Red background color for button */
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s, color 0.3s;
+        font-weight: bold;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .profile-container a:hover {
+        background-color: #c82333; /* Darker red on hover */
+        color: #e0e0e0;
+    }
+</style>
+
+<div class="profile-container">
+    <h1>User Profile</h1>
+
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+
+    <a href="{% url 'change_password' %}">Change Password</a>
+</div>
+{% endblock %}

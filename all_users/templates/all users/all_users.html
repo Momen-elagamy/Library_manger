@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br><br><br>
+<h1>All Users</h1>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Date Joined</th>
+                <!-- Add more fields if needed -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.date_joined }}</td>
+                <!-- Add more fields if needed -->
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No users found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .table-container {
+        background-color: #1e1e1e; /* Dark background for the table container */
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        max-width: 800px;
+        margin: 20px auto; /* Center the table */
+        color: #e0e0e0; /* Light text color */
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+    }
+
+    thead {
+        background-color: #333; /* Dark background for table header */
+    }
+
+    th {
+        color: #00bfae; /* Unique color for table headers */
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #2c2c2c; /* Slightly lighter dark background for table rows */
+    }
+
+    tbody tr:nth-child(odd) {
+        background-color: #1e1e1e; /* Dark background for table rows */
+    }
+
+    tbody tr:hover {
+        background-color: #333; /* Highlight row on hover */
+    }
+
+    td {
+        color: #e0e0e0; /* Light text color for table data */
+    }
+
+    .empty-message {
+        text-align: center;
+        color: #e0e0e0; /* Light text color */
+    }
+</style>
+
+{% endblock %}

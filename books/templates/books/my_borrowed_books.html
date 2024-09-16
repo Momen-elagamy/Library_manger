@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .borrowed-books-container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        background-color: #1e1e1e; /* Dark background for content */
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        color: #e0e0e0; /* Light text color */
+        text-align: center; /* Center-align the text */
+    }
+
+    .borrowed-books-container h1 {
+        margin-bottom: 20px;
+        color: #00bfae; /* Unique color for headings */
+    }
+
+    .borrowed-books-container ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .borrowed-books-container li {
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #333; /* Slightly lighter dark background for items */
+        border-radius: 5px;
+    }
+
+    .borrowed-books-container p {
+        font-size: 16px;
+        margin-top: 20px;
+    }
+</style>
+<br>
+<br>
+<br>
+<div class="borrowed-books-container">
+    <h1>My Borrowed Books</h1>
+    {% if borrowed_books %}
+        <ul>
+            {% for borrowed in borrowed_books %}
+                <li>{{ borrowed.book.title }} - Return by {{ borrowed.return_date }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have no borrowed books.</p>
+    {% endif %}
+</div>
+
+{% endblock %}
